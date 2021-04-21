@@ -68,9 +68,7 @@ def reply_to_tweets(CONSUMER_KEY
         replier_last_seen_id_ls = fh.retrieve_last_seen_id(REPLIER_FILE_NAME)
         engaged_tweet_ids = list(set(mentions_last_seen_id_ls).union(set(replier_last_seen_id_ls)))
         
-        if twt_id not in engaged_tweet_ids:
-            fh.store_last_seen_id(twt_id, REPLIER_FILE_NAME)
-            
+        if twt_id not in engaged_tweet_ids:            
             if th.keywords_exists(param.filter_keywords, twt_user_name) == 0:
                 if 'india' in str(twt_user_location).lower() or len(twt_user_location)==0:
                     if th.keywords_exists(param.txt_filter_keywords, twt_txt) == 0:
@@ -87,7 +85,7 @@ def reply_to_tweets(CONSUMER_KEY
                                           ,auto_populate_reply_metadata=True
                                           ,media_ids=th.attach_media_files(api,param.media_ls))
                         #attachment_url='https://twitter.com/CovidPlasmaIn/status/1280240709048524800?s=20'
-                        
+                        fh.store_last_seen_id(twt_id, REPLIER_FILE_NAME)
                         logger.info(str(twt_id) + ' - ' + twt_user_name)
                         tp.send_message(tgram_token,tgram_success_chatid,'COPLA SEARCH REPLY BOT - ' + str(twt_id) + ' - ' + str(twt_user_name) + ' - ' + str(twt_txt))
                         
@@ -139,7 +137,7 @@ def reply_to_mentions(CONSUMER_KEY
     # NOTE: We need to use tweet_mode='extended' below to show
     # all full tweets (with full_text). Without it, long tweets
     # would be cut off.
-    mentions = api.mentions_timeline(since_id = max_last_seen_id, tweet_mode='extended', count=100)
+    mentions = api.mentions_timeline(since_id = max_last_seen_id, tweet_mode='extended', count=5000)
     #Logged in user_name
     user_me = api.me().screen_name
     
