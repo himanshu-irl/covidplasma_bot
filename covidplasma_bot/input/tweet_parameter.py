@@ -27,6 +27,25 @@ tweet_list = ['Compiled list of available resources for getting in touch with CO
             ,'A compiled list of resources to help you connect to the COVID recovered plasma donors'
             ,'Consolidated list of available resources to match COVID-19 plasma recipients and donors']
 
+tsi_reply_list = ['@TeamSOSIndia Could you please look into this request?'
+                ,'@TeamSOSIndia Could you please look into this case?'
+                ,'@TeamSOSIndia Could you kindly look into this case?'
+                ,'@TeamSOSIndia Could you kindly look into this request?'
+                ,'@TeamSOSIndia Kindly look into this request.'
+                ,'@TeamSOSIndia Kindly look into this case.'
+                ,'@TeamSOSIndia Please look into this request.'
+                ,'@TeamSOSIndia Please look into this case.'
+                ,'@TeamSOSIndia Requesting you to kindly look into this case.'
+                ,'@TeamSOSIndia Requesting you to kindly look into this request.'
+                ,'@TeamSOSIndia Requesting you to please look into this request.'
+                ,'@TeamSOSIndia Requesting you to please look into this case.'
+                ,'@TeamSOSIndia Requesting you to please assist.'
+                ,'@TeamSOSIndia Requesting you to kindly assist.'
+                ,'Adding @TeamSOSIndia for further assistance.'
+                ,'Adding @TeamSOSIndia for further support.'
+                ,'Tagging @TeamSOSIndia for further support.'
+                ,'Tagging @TeamSOSIndia for further assistance.']
+
 media_ls = os.listdir(paths.media_path)
 
 filter_keywords = ['covidplasmain','madihafatima27','blood4pune','abhilasha1508','hydblooddonors'
@@ -41,6 +60,8 @@ mentions_acc_filter = ['i_lakshay99','CasesGurgaon','architgupta99','dramebaz_wo
                         ,'OberoiUgo','damodarpulpet','TeamSOSIndia'
                         ,'RaktaSatyagrah','TSIArmy','yuvahallabol']
 
+mention_acc_check = ['TeamSOSIndia']
+
 tweet_template = '''::greet:: ::user_name:: - ::twt_text::
 
 Daily COVID-19 trends as of ::publish_dtm:: 🇮🇳:
@@ -51,3 +72,14 @@ Tot. Active: ::totalactive_value::::totalactive_trend::
 TPR (L7D Avg): ::tpr_value::::tpr_trend::
 
 ::hashtag::'''
+
+mention_reply_template = '''::greet:: ::user_name:: - ::twt_text::
+
+Daily COVID-19 trends as of ::publish_dtm:: 🇮🇳:
++ve: ::deltaconfirmed_value::::deltaconfirmed_trend::
+Recovery: ::deltarecovered_value::::deltarecovered_trend::
+Death: ::deltadeaths_value::::deltadeaths_trend::
+Tot. Active: ::totalactive_value::::totalactive_trend::
+TPR (L7D Avg): ::tpr_value::::tpr_trend::
+
+#TeamIndiaVsCovid'''

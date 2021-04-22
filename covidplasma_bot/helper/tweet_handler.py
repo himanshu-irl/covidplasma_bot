@@ -33,10 +33,16 @@ def reply_back(greet_list
                ,tweet_list
                ,publish_dtm
                ,trend_df
-               ,hash_list):
+               ,hash_list
+               ,tsi_check_flag=0):
     greet_txt = rand_item(greet_list)
     twt_text = rand_item(tweet_list)
     
+    if tsi_check_flag==1:
+        twt_template = param.tweet_template
+    else:
+        twt_template = param.mention_reply_template
+        
     #Getting covid KPI values
     deltaconfirmed_value = trend_df[trend_df['metric'] == 'deltaconfirmed']['value'].values[0]
     deltaconfirmed_trend = trend_df[trend_df['metric'] == 'deltaconfirmed']['trend'].values[0]
@@ -50,7 +56,7 @@ def reply_back(greet_list
     tpr_trend = trend_df[trend_df['metric'] == 'tpr']['trend'].values[0]
     hashtag = rand_item(hash_list)
     
-    tweet_back = param.tweet_template.replace('::greet::', greet_txt)
+    tweet_back = twt_template.replace('::greet::', greet_txt)
     tweet_back = tweet_back.replace('::user_name::', twt_user_name)
     tweet_back = tweet_back.replace('::twt_text::', twt_text)
     tweet_back = tweet_back.replace('::publish_dtm::', publish_dtm)

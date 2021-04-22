@@ -15,8 +15,10 @@ from covidplasma_bot.trends import covid_trends as ct
 acc_filter = param.mentions_acc_filter
 greet_list = param.greet_list
 tweet_list = param.tweet_list
+tsi_reply_list = param.tsi_reply_list
 #publish_dtm = (dtm.datetime.now()+dtm.timedelta(hours=5.5)).strftime('%d %b %I%p')
 hash_list = param.hash_list
+mention_acc_check = param.mention_acc_check
 
 def publish_dtm():
     return (dtm.datetime.now()+dtm.timedelta(hours=5.5)).strftime('%d %b %I%p')
@@ -158,8 +160,12 @@ def reply_to_mentions(CONSUMER_KEY
         if twt_id not in engaged_tweet_ids and mention_user_name not in acc_filter:            
             mention_user_engaged = [u['screen_name'] for u in mention.entities['user_mentions']]
             mention_user_engaged.append(mention_user_name)
-            
+            mention_usr_eng_set = set(mention_user_engaged)
+
+            mention_acc_flag = list(mention_usr_eng_set.intersection(mention_acc_check))
+
             common_users = []
+            mention_last_twt_check = []
             reply_flag = False
             
             try:
@@ -173,7 +179,8 @@ def reply_to_mentions(CONSUMER_KEY
                     user_engaged = [u['screen_name'] for u in in_reply_to_orig_tweet.entities['user_mentions']]
                     user_engaged.append(in_reply_to_orig_tweet.user.screen_name)
                     common_users = list(set(mention_user_engaged).intersection(user_engaged))
-                    
+                    mention_last_twt_check = list(set(user_engaged).intersection(mention_acc_check))
+                
                 if user_me in common_users and len(common_users) > 0:
                     print('Already engaged...')
                 
@@ -191,14 +198,25 @@ def reply_to_mentions(CONSUMER_KEY
                     reply_flag = True
                 
                 if reply_flag:
+                    if len(mention_acc_flag) > 0 or len(mention_last_twt_check):
+                        # when tsi mentioned or mentioned in reply to an existing tweet
+                        # normal template is followed
+                        twt_inp_ls = tweet_list
+                        tsi_check_flag = 1
+                    else:
+                        # tsi call is sent
+                        twt_inp_ls = tsi_reply_list
+                        tsi_check_flag = 0
+                    
                     print('responding back...', flush=True)
                     logger.info('responding back...')
                     api.update_status(th.reply_back(greet_list
                                                     ,mention_user_name
-                                                    ,tweet_list
+                                                    ,twt_inp_ls
                                                     ,publish_dtm = publish_dtm()
                                                     ,trend_df = ct.get_covid_data(logger)
-                                                    ,hash_list = hash_list)
+                                                    ,hash_list = hash_list
+                                                    ,tsi_check_flag=tsi_check_flag)
                                       ,twt_id
                                       ,auto_populate_reply_metadata=True
                                       ,media_ids=th.attach_media_files(api,param.media_ls))
