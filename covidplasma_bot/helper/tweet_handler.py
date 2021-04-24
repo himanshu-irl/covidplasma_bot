@@ -38,7 +38,7 @@ def reply_back(greet_list
     greet_txt = rand_item(greet_list)
     twt_text = rand_item(tweet_list)
     
-    if tsi_check_flag==1:
+    if tsi_check_flag==0:
         twt_template = param.tweet_template
     else:
         twt_template = param.mention_reply_template

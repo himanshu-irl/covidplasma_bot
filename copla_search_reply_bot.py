@@ -60,7 +60,7 @@ while True:
                            ,MENTION_FILE_NAME
                            ,search_for = param.search_for
                            ,date_since = date_since
-                           ,rand_sleep=8)
+                           ,rand_sleep=6)
     except tweepy.TweepError as e:
         print(e)
         tp.send_message(tgram_token,tgram_error_chatid,str('COVID PLASMA BOT REPLIER ERROR: ' + str(e.args[0][0]['code']) + ' - ' + str(e.args[0][0]['message'])))

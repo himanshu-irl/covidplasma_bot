@@ -15,7 +15,7 @@ greet_list = ['Hi','Hello','Hey','Namaste']
 hash_list = ['#DonatePlasmaSaveALife','#plasmadonor','#COVID19','#COVID19India','#IndiaFightsCorona','#DonatePlasma','#SaveALife','#plasmatherapy'
             ,'#coronavirus','#TogetherWeCan','#plasmasaveslives','#PlasmaDonorHeroes','#plasma','#donateplasmaforhumanity','#indiacares'
             ,'#TwitterForGood','#PlasmaForIndia','#LetsFightCoronaTogether','#plasmadonation','#PlasmaMatters','#IndiaVsCorona','#IndiaVsCovid'
-            ,'#PlasmaForIndia','#SpreadTheWord','#StopTheSpread','#LetsFightCorona']
+            ,'#PlasmaForIndia','#SpreadTheWord','#StopTheSpread','#LetsFightCorona','#TeamIndiaVsCovid']
 
 tweet_list = ['Compiled list of available resources for getting in touch with COVID-19 recovered plasma donors'
             ,'If you are looking to connect with a COVID-19 recovered plasma donor, then please refer to the site'
@@ -82,4 +82,4 @@ Death: ::deltadeaths_value::::deltadeaths_trend::
 Tot. Active: ::totalactive_value::::totalactive_trend::
 TPR (L7D Avg): ::tpr_value::::tpr_trend::
 
-#TeamIndiaVsCovid'''
+::hashtag::'''

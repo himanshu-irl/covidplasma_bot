@@ -109,7 +109,7 @@ def reply_to_tweets(CONSUMER_KEY
                             #logger.info('sending direct message...')
                             #api.send_direct_message(twt.user.id,reply_back(True))
                         print('sleeping...', flush=True)
-                        time.sleep(random.randint(rand_sleep*60,(rand_sleep+4)*60))
+                        time.sleep(random.randint(rand_sleep*60,(rand_sleep+2)*60))
                         
 
 #----------------------------------------#
@@ -202,11 +202,11 @@ def reply_to_mentions(CONSUMER_KEY
                         # when tsi mentioned or mentioned in reply to an existing tweet
                         # normal template is followed
                         twt_inp_ls = tweet_list
-                        tsi_check_flag = 1
+                        tsi_check_flag = 0
                     else:
                         # tsi call is sent
                         twt_inp_ls = tsi_reply_list
-                        tsi_check_flag = 0
+                        tsi_check_flag = 1
                     
                     print('responding back...', flush=True)
                     logger.info('responding back...')
@@ -228,6 +228,6 @@ def reply_to_mentions(CONSUMER_KEY
                     logger.info('storing tweet ID...')
                     fh.store_last_seen_id(twt_id, MENTION_FILE_NAME)
                     
-                    time.sleep(random.randint(rand_sleep*60,(rand_sleep+4)*60))
+                    time.sleep(random.randint(rand_sleep*60,(rand_sleep+2)*60))
             except:
                 print('error encountered...')
