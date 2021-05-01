@@ -27,7 +27,31 @@ tweet_list = ['Compiled list of available resources for getting in touch with CO
             ,'A compiled list of resources to help you connect to the COVID recovered plasma donors'
             ,'Consolidated list of available resources to match COVID-19 plasma recipients and donors']
 
-tsi_reply_list = ['@TeamSOSIndia Could you please look into this request?'
+tsi_reply_list = ["Noted. Communicated to Team SOS India."
+                 ,"Noted. Communicated to Team SOS India. Volunteers will connect with you."
+                 ,"Noted. Communicated to Team SOS India. Volunteers will reach out to you."
+                 ,"Noted. TeamSOSIndia's volunteers notified."
+                 ,"Noted. TeamSOSIndia's volunteers informed."
+                 ,"Noted. TeamSOSIndia's local volunteers informed."
+                 ,"Noted. TeamSOSIndia's local volunteers notified."
+                 ,"Noted. TeamSOSIndia's local volunteers notified."
+                 ,"We are coordinating with TeamSOSIndia for this request."
+                 ,"We are coordinating with TeamSOSIndia for this request. Volunteers will connect with you."
+                 ,"We are coordinating with TeamSOSIndia for this request. Volunteers will reach out to you."
+                 ,"We are connecting with TeamSOSIndia for this request. Volunteers will connect with you."
+                 ,"We are connecting with TeamSOSIndia for this request. Volunteers will reach out to you."
+                 ,"We are connecting with TeamSOSIndia for this case. Volunteers will connect with you."
+                 ,"We are connecting with TeamSOSIndia for this case. Volunteers will reach out to you."
+                 ,"We are connecting with TeamSOSIndia for this request."
+                 ,"We are connecting with TeamSOSIndia for this case."
+                 ,"Noted. TeamSOSIndia is working on it."
+                 ,"Noted. TeamSOSIndia will connect with you."
+                 ,"Noted. TeamSOSIndia will reach out to you."
+                 ,"Noted. TeamSOSIndia will coordinate with you."
+                 ,"We have communicated this request to TeamSOSIndia."
+                 ,"We have communicated this case to TeamSOSIndia."]
+
+tsi_reply_list_old = ['@TeamSOSIndia Could you please look into this request?'
                 ,'@TeamSOSIndia Could you please look into this case?'
                 ,'@TeamSOSIndia Could you kindly look into this case?'
                 ,'@TeamSOSIndia Could you kindly look into this request?'
@@ -50,7 +74,7 @@ media_ls = os.listdir(paths.media_path)
 
 filter_keywords = ['covidplasmain','madihafatima27','blood4pune','abhilasha1508','hydblooddonors'
                    ,'blooddonorsin','teamsosindia','theniteshsingh','raktnssdtu','kabwelfare'
-                   ,'blood_matter','bloodaid','icansavelife']
+                   ,'blood_matter','bloodaid','icansavelife','dramebaz_woman','TheNeatSoul']
 
 txt_filter_keywords = ['blood4pune','SOSSaviours','sandhyafernez','rohit_4464','boomzy1231','DarshanNPopat','kalpeshvporwal1','INCaniketMhatre'
                        ,'manishJain1234','dial4242','indiacares_2020']
@@ -73,13 +97,12 @@ TPR (L7D Avg): ::tpr_value::::tpr_trend::
 
 ::hashtag::'''
 
-mention_reply_template = '''::greet:: ::user_name:: - ::twt_text::
+mention_reply_template = '''::greet:: ::user_name::
 
-Daily COVID-19 trends as of ::publish_dtm:: 🇮🇳:
-+ve: ::deltaconfirmed_value::::deltaconfirmed_trend::
-Recovery: ::deltarecovered_value::::deltarecovered_trend::
-Death: ::deltadeaths_value::::deltadeaths_trend::
-Tot. Active: ::totalactive_value::::totalactive_trend::
-TPR (L7D Avg): ::tpr_value::::tpr_trend::
+::twt_text::
+
+Case ID: ::case_id::
+
+The team is currently overloaded with the requests and will cater this case in chronological order.
 
 ::hashtag::'''

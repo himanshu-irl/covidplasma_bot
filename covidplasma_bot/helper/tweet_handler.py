@@ -34,7 +34,8 @@ def reply_back(greet_list
                ,publish_dtm
                ,trend_df
                ,hash_list
-               ,tsi_check_flag=0):
+               ,tsi_check_flag=0
+               ,case_id=0):
     greet_txt = rand_item(greet_list)
     twt_text = rand_item(tweet_list)
     
@@ -74,6 +75,9 @@ def reply_back(greet_list
     
     tweet_back = tweet_back.replace('::hashtag::', hashtag)
     
+    if case_id > 0:
+        tweet_back = tweet_back.replace('::case_id::', str(case_id))
+
     return tweet_back
 
 #----------------------------------------#

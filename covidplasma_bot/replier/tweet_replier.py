@@ -216,7 +216,8 @@ def reply_to_mentions(CONSUMER_KEY
                                                     ,publish_dtm = publish_dtm()
                                                     ,trend_df = ct.get_covid_data(logger)
                                                     ,hash_list = hash_list
-                                                    ,tsi_check_flag=tsi_check_flag)
+                                                    ,tsi_check_flag=tsi_check_flag
+                                                    ,case_id=twt_id)
                                       ,twt_id
                                       ,auto_populate_reply_metadata=True
                                       ,media_ids=th.attach_media_files(api,param.media_ls))
