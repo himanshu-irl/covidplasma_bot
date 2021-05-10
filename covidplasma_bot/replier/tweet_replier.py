@@ -229,6 +229,6 @@ def reply_to_mentions(CONSUMER_KEY
                     logger.info('storing tweet ID...')
                     fh.store_last_seen_id(twt_id, MENTION_FILE_NAME)
                     
-                    time.sleep(random.randint(rand_sleep*60,(rand_sleep+2)*60))
+                    time.sleep(random.randint(rand_sleep*60,(rand_sleep+1)*60))
             except:
                 print('error encountered...')

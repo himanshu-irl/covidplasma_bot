@@ -53,7 +53,7 @@ while True:
                              ,logger
                              ,REPLIER_FILE_NAME
                              ,MENTION_FILE_NAME
-                             ,rand_sleep=2)
+                             ,rand_sleep=1)
     except tweepy.TweepError as e:
         print(e)
         tp.send_message(tgram_token,tgram_error_chatid,str('COPLA - MENTION REPLY BOT - ERROR: ' + str(e.args[0][0]['code']) + ' - ' + str(e.args[0][0]['message'])))
