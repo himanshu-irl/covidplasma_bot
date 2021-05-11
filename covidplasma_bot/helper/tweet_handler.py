@@ -8,6 +8,16 @@ import tweepy
 import os 
 import random
 from covidplasma_bot.input import tweet_parameter as param
+
+#----------------------------------------#
+# twitter api connection authenticator
+def twt_conx_api(CONSUMER_KEY, CONSUMER_SECRET, ACCESS_KEY, ACCESS_SECRET):
+    auth = tweepy.OAuthHandler(CONSUMER_KEY, CONSUMER_SECRET)
+    auth.set_access_token(ACCESS_KEY, ACCESS_SECRET)
+    api = tweepy.API(auth,wait_on_rate_limit=True,wait_on_rate_limit_notify=True)
+
+    return api
+    
 #----------------------------------------#
 #Udf for selecting random item from a list
 def rand_item(ls):
@@ -99,3 +109,39 @@ def attach_media_files(api, media_ls):
     return media_list
 
 #----------------------------------------#
+# generating resource text from template
+def resource_generator(row):
+    inp_dict = {}
+    for index in list(row.index):
+        value = str(row[index])
+        inp_dict[index] = value
+    
+    # configuring info text
+    info_txt = [inp_dict['info_txt_1'],inp_dict['info_txt_2'],inp_dict['info_txt_3']]
+    info_txt = [x for x in info_txt if len(x.replace(' ',''))>0]
+    info_txt = '\n'.join(info_txt)
+
+    # configuring contact text
+    contact_txt = [inp_dict['contact_1'],inp_dict['contact_2'],inp_dict['contact_3']]
+    contact_txt = [x for x in contact_txt if len(x.replace(' ',''))==10]
+    contact_txt = [f'{x} (wa.me/91{x})' for x in contact_txt]
+    contact_txt = ', '.join(contact_txt)
+
+    # configuring twitter handle
+    if len(inp_dict['twt_handle'].replace(' ',''))>0:
+        twt_handle = inp_dict['twt_handle'].replace(' ','')
+        twt_handle = twt_handle.replace('@','')
+        twt_handle = f'\nvia @{twt_handle}\n'
+
+    else:
+        twt_handle = ''
+
+    twt_text = param.resource_template
+    twt_text = twt_text.replace('::city::',inp_dict['city'])
+    twt_text = twt_text.replace('::resource_type::',inp_dict['resource_type'])
+    twt_text = twt_text.replace('::dtmz::',inp_dict['Timestamp'])
+    twt_text = twt_text.replace('::info_txt::',info_txt)
+    twt_text = twt_text.replace('::contact_txt::',contact_txt)
+    twt_text = twt_text.replace('::twt_handle::',twt_handle)
+
+    return twt_text
