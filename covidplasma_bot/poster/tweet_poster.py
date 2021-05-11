@@ -8,17 +8,13 @@ import tweepy
 from covidplasma_bot.helper import telegram_poster as tp
 import gspread
 import pandas as pd
-from oauth2client.service_account import ServiceAccountCredentials
 from gspread_dataframe import set_with_dataframe
 from datetime import datetime, timedelta
 import time
 import random
 import pytz
-from covidplasma_bot.input import tweet_parameter as param
 from covidplasma_bot.helper import tweet_handler as th
 from covidplasma_bot.helper import gsheet_handler as gh
-from covidplasma_bot.helper import telegram_poster as tp
-from covidplasma_bot.input import keys, paths
 
 def post_tweet(CONSUMER_KEY
             ,CONSUMER_SECRET
@@ -107,7 +103,7 @@ def resource_poster(sheet_name
                     # posting on TSI
                     print('publishing request on TSI...')
                     logger.info('publishing request on TSI...')
-                    #tsi_api.update_status(twt_text)
+                    tsi_api.update_status(twt_text)
                     # sending log to telegram
                     tp.send_message(tgram_token
                                         ,tgram_success_chatid
@@ -115,7 +111,7 @@ def resource_poster(sheet_name
                     # posting to CoPla
                     print('publishing request on CoPla...')
                     logger.info('publishing request on CoPla...')
-                    #copla_api.update_status(twt_text)
+                    copla_api.update_status(twt_text)
                     # sending log to telegram
                     tp.send_message(tgram_token
                                         ,tgram_success_chatid

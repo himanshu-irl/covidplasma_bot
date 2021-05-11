@@ -8,6 +8,7 @@ import tweepy
 import os 
 import random
 from covidplasma_bot.input import tweet_parameter as param
+from datetime import datetime as dtm
 
 #----------------------------------------#
 # twitter api connection authenticator
@@ -127,19 +128,21 @@ def resource_generator(row):
     contact_txt = [f'{x} (wa.me/91{x})' for x in contact_txt]
     contact_txt = ', '.join(contact_txt)
 
+    # configuring timestamp
+    dtmz = inp_dict['Timestamp']
+
     # configuring twitter handle
     if len(inp_dict['twt_handle'].replace(' ',''))>0:
         twt_handle = inp_dict['twt_handle'].replace(' ','')
         twt_handle = twt_handle.replace('@','')
         twt_handle = f'\nvia @{twt_handle}\n'
-
     else:
         twt_handle = ''
 
     twt_text = param.resource_template
     twt_text = twt_text.replace('::city::',inp_dict['city'])
     twt_text = twt_text.replace('::resource_type::',inp_dict['resource_type'])
-    twt_text = twt_text.replace('::dtmz::',inp_dict['Timestamp'])
+    twt_text = twt_text.replace('::dtmz::',dtmz)
     twt_text = twt_text.replace('::info_txt::',info_txt)
     twt_text = twt_text.replace('::contact_txt::',contact_txt)
     twt_text = twt_text.replace('::twt_handle::',twt_handle)

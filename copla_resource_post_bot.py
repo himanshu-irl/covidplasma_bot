@@ -63,8 +63,8 @@ while True:
                            ,tgram_token
                            ,tgram_success_chatid
                            ,logger
-                           ,rand_sleep=1
-                           ,sleep_lag=1)
+                           ,rand_sleep=3
+                           ,sleep_lag=2)
         
     except tweepy.TweepError as e:
         print(e)
