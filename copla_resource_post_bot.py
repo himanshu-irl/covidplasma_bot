@@ -40,6 +40,9 @@ tgram_error_chatid = keys.error_chatid # Twitter Bot Notifications channel
 
 #Setting up paths
 LOG_FILE_NAME = paths.resource_post_log_file
+input_template_file = paths.input_template_file
+output_resource_file = paths.output_resource_file
+font_file = paths.font_file
 
 # poster parameters
 sheet_name = 'covid_resources'
@@ -63,6 +66,9 @@ while True:
                            ,tgram_token
                            ,tgram_success_chatid
                            ,logger
+                           ,image_path=input_template_file
+                           ,output_path=output_resource_file
+                           ,font_path=font_file
                            ,rand_sleep=3
                            ,sleep_lag=2)
         

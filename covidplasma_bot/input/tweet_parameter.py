@@ -115,13 +115,11 @@ news_post_template = '''#CovidUpdate #Covid19India
 
 #TeamIndiaVsCovid #COVIDEmergencyIndia'''
 
-resource_template = '''#Covid #Verified Resource Update
-#::city:: #::resource_type::
+resource_template = '''#::city:: #::resource_type::
 
-Verified @ ::dtmz:: ✅
+#Verified @ ::dtmz:: ✅
 
 ::info_txt::
-
-Contact: ::contact_txt::
+::contact_txt::
 ::twt_handle::
-#TeamIndiaVsCovid #COVIDEmergencyIndia #Covid19IndiaHelp'''
+#Covid19IndiaHelp'''

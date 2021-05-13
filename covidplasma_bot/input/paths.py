@@ -9,6 +9,7 @@ import os
 #Setting up paths
 ## Folders
 data_path = 'data'
+img_path = 'data\\img'
 media_path = 'media'
 log_path = 'log'
 
@@ -32,3 +33,8 @@ replier_file = os.path.join(data_path,'replier_last_seen_id.txt')
 
 # trend files
 covid_trend_file = os.path.join(data_path,'covid_trends_data.csv')
+
+# image files
+input_template_file = os.path.join(img_path,'input_resource_template.png')
+output_resource_file = os.path.join(img_path,'output_resource.png')
+font_file = os.path.join(img_path,'Barlow-Medium.ttf')

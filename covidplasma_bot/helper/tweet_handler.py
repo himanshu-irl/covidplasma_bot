@@ -101,9 +101,13 @@ def get_friends_list(api,user_screen_name='CovidPlasmaIn'):
     return friends_ls
 
 #----------------------------------------#
-#Udf for attaching media in a tweet
-def attach_media_files(api, media_ls): 
-    media_path = os.path.join('media',rand_item(media_ls))    
+# function for attaching media in a tweet
+def attach_media_files(api, media, mode='multi'):
+    if mode=='multi':
+        media = rand_item(media)
+        media_path = os.path.join('media', media)    
+    else:
+        media_path = media
     media_list = list()
     response = api.media_upload(media_path)
     media_list.append(response.media_id_string)
@@ -111,7 +115,7 @@ def attach_media_files(api, media_ls):
 
 #----------------------------------------#
 # generating resource text from template
-def resource_generator(row):
+def resource_generator(row, mode='text'):
     inp_dict = {}
     for index in list(row.index):
         value = str(row[index])
@@ -124,13 +128,20 @@ def resource_generator(row):
 
     # configuring contact text
     contact_txt = [inp_dict['contact_1'],inp_dict['contact_2'],inp_dict['contact_3']]
-    contact_txt = [x for x in contact_txt if len(x.replace(' ',''))==10]
-    contact_txt = [f'{x} (wa.me/91{x})' for x in contact_txt]
+    #contact_txt = [x for x in contact_txt if len(x.replace(' ',''))==10]
+    contact_txt = [x for x in contact_txt if len(x.replace(' ',''))>0]
+    #contact_txt = [f'{x} (wa.me/91{x})' for x in contact_txt]
     contact_txt = ', '.join(contact_txt)
+    if len(contact_txt.replace(', ',''))>0:
+        contact_txt = f'\nContact: {contact_txt}\n'
+    else:
+        contact_txt = ''
 
     # configuring timestamp
     dtmz = inp_dict['Timestamp']
-
+    dtmz = dtm.strptime(dtmz, '%d/%m/%Y %H:%M:%S')
+    dtmz = dtmz.strftime('%d-%b %I:%M %p')
+    
     # configuring twitter handle
     if len(inp_dict['twt_handle'].replace(' ',''))>0:
         twt_handle = inp_dict['twt_handle'].replace(' ','')
@@ -147,4 +158,4 @@ def resource_generator(row):
     twt_text = twt_text.replace('::contact_txt::',contact_txt)
     twt_text = twt_text.replace('::twt_handle::',twt_handle)
 
-    return twt_text
+    return twt_text if mode=='text' else inp_dict

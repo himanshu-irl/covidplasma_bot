@@ -15,6 +15,7 @@ import random
 import pytz
 from covidplasma_bot.helper import tweet_handler as th
 from covidplasma_bot.helper import gsheet_handler as gh
+from covidplasma_bot.poster import img_creator as ic
 
 def post_tweet(CONSUMER_KEY
             ,CONSUMER_SECRET
@@ -52,6 +53,9 @@ def resource_poster(sheet_name
                     ,tgram_token
                     ,tgram_success_chatid
                     ,logger
+                    ,image_path
+                    ,output_path
+                    ,font_path
                     ,rand_sleep
                     ,sleep_lag):
 
@@ -70,7 +74,7 @@ def resource_poster(sheet_name
     print('filtering sheet data...')
     logger.info('filtering sheet data...')
     current_time = datetime.now(pytz.timezone('Asia/Calcutta')).replace(tzinfo=None)
-    prod_data = prod_data[pd.to_datetime(prod_data['Timestamp']) > current_time - timedelta(hours=12)]
+    prod_data = prod_data[pd.to_datetime(prod_data['Timestamp'], format='%d/%m/%Y %H:%M:%S') > current_time - timedelta(hours=12)]
 
     # creating row_id for joining pord and aux sheets
     print('creating row_id for sheet data...')
@@ -100,10 +104,21 @@ def resource_poster(sheet_name
             print(twt_text)
             if len(twt_text) <= 280:
                 try:
+                    # generating image
+                    ic.create_img(row
+                                  ,offset=700
+                                  ,width=38
+                                  ,image_path=image_path
+                                  ,output_path=output_path
+                                  ,font_path=font_path)
+                    time.sleep(15)
                     # posting on TSI
                     print('publishing request on TSI...')
                     logger.info('publishing request on TSI...')
-                    tsi_api.update_status(twt_text)
+                    tsi_api.update_status(twt_text
+                                          ,media_ids=th.attach_media_files(tsi_api
+                                                                           ,output_path
+                                                                           ,mode='single'))
                     # sending log to telegram
                     tp.send_message(tgram_token
                                         ,tgram_success_chatid
@@ -111,7 +126,11 @@ def resource_poster(sheet_name
                     # posting to CoPla
                     print('publishing request on CoPla...')
                     logger.info('publishing request on CoPla...')
-                    copla_api.update_status(twt_text)
+                    #copla_api.update_status(twt_text)
+                    copla_api.update_status(twt_text
+                                            ,media_ids=th.attach_media_files(copla_api
+                                                                             ,output_path
+                                                                             ,mode='single'))
                     # sending log to telegram
                     tp.send_message(tgram_token
                                         ,tgram_success_chatid
