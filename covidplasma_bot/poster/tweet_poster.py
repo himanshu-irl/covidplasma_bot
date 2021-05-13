@@ -93,8 +93,8 @@ def resource_poster(sheet_name
     # removing already published records and selecting top 5 records
     prod_aux_data = prod_aux_data[prod_aux_data['posted']!=1].head(5)
     
-    print('initiating request publishing...')
-    logger.info('initiating request publishing...')
+    print('initiating request publish...')
+    logger.info('initiating request publish...')
     counter = 0
     for index, row in prod_aux_data.iterrows():
         if row['posted'] != 1:

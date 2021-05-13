@@ -9,7 +9,7 @@ import os
 #Setting up paths
 ## Folders
 data_path = 'data'
-img_path = 'data\\img'
+img_path = 'data/img'
 media_path = 'media'
 log_path = 'log'
 
