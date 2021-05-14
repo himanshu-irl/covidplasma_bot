@@ -92,6 +92,8 @@ def create_img(row
                 offset+=70
             elif 'contact' in input_txt[count+1].lower() and len(input_txt)<=4:
                 offset+=250
+        if offset>=1500:
+            offset=1500
         count+=1
         
     img.save(output_path)
