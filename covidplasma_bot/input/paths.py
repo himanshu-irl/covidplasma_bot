@@ -19,6 +19,7 @@ replier_log_file = os.path.join(log_path,'copla_search_reply_bot.log')
 news_log_file = os.path.join(log_path,'copla_news_post_bot.log')
 news_refresh_log_file = os.path.join(log_path,'copla_news_refresh.log')
 resource_post_log_file = os.path.join(log_path,'resource_post.log')
+trend_post_log_file = os.path.join(log_path,'trend_post.log')
 
 # NLP model files
 news_model_file = os.path.join(data_path,'covid_news_model.sav')

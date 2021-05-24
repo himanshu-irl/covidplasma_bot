@@ -37,11 +37,14 @@ def post_tweet(CONSUMER_KEY
         # posting on twitter
         print('publishing post on twitter...')
         logger.info('publishing post on twitter...')
-        api.update_status(input_txt)
-        # sending log to telegram
-        tp.send_message(tgram_token
-                            ,tgram_success_chatid
-                            ,'Tweet POST - CovidPlasmaIn - ' + str(input_txt))
+        if len(input_txt) > 0:
+            api.update_status(input_txt)
+            # sending log to telegram
+            tp.send_message(tgram_token
+                                ,tgram_success_chatid
+                                ,'Tweet POST - CovidPlasmaIn - ' + str(input_txt))
+        else:
+            print('tweet not posted...')
     except:
         print('error encountered in posting...')
 

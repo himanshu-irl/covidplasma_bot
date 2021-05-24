@@ -106,6 +106,19 @@ TPR (L7D Avg): ::tpr_value::::tpr_trend::
 
 ::hashtag::'''
 
+trend_template = '''Hourly COVID-19 trends as of ::publish_dtm:: 🇮🇳:
+
++ve: ::deltaconfirmed_value:: ::deltaconfirmed_trend::
+Recovery: ::deltarecovered_value:: ::deltarecovered_trend::
+Death: ::deltadeaths_value:: ::deltadeaths_trend::
+Tot. Active: ::totalactive_value:: ::totalactive_trend::
+TPR (L7D Avg): ::tpr_value:: ::tpr_trend::
+
+- Trends are based on last 7 day moving avg. over a window of last 21 days
+- Data source: Covid19Indiaorg API
+
+#COVIDEmergencyIndia'''
+
 mention_reply_template = '''::greet:: ::user_name::
 
 ::twt_text::
