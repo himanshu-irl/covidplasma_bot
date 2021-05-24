@@ -108,12 +108,21 @@ def lda_model(news_df):
     doc_topic = lda.transform(tf)
     topic_most_pr = {}
     for n in range(doc_topic.shape[0]):
-        topic_most_pr[n] = doc_topic[n].argmax()
+        topic_most_pr[n] = doc_topic[n].argmax(), doc_topic[n][doc_topic[n].argmax()]
     
-    topic_doc = pd.DataFrame.from_dict(topic_most_pr, orient='index', columns = ['topic'])
+    topic_doc = pd.DataFrame.from_dict(topic_most_pr, orient='index', columns = ['topic','topic_score'])
     news_df['Topic'] = topic_doc['topic']
- 
-    news_df['Label'] = np.where(news_df['Topic']==3, 1, 0)
+    news_df['Topic_score'] = topic_doc['topic_score']
+    
+    # selecting 80th percentile as the cutoff score for Topic=3
+    score_cutoff = news_df['Topic_score'][news_df['Topic']==3].quantile(0.8)
+    
+    # cut-off score for selecting topic 3 articles
+    news_df['Label'] = np.where((news_df['Topic']==3) & (news_df['Topic_score']>=score_cutoff), 1, 0)
+    #news_df['Label'] = np.where((news_df['Topic']==3) & (news_df['Topic_score']<score_cutoff), -1, 0)
+    
+    del news_df['Topic_score']
+    
     return news_df
 
 def write_gsheets(news_df):

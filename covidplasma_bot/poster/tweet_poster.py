@@ -107,7 +107,7 @@ def resource_poster(sheet_name
                     # generating image
                     ic.create_img(row
                                   ,offset=700
-                                  ,width=38
+                                  ,width=36
                                   ,image_path=image_path
                                   ,output_path=output_path
                                   ,font_path=font_path)

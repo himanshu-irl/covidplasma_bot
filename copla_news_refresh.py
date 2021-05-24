@@ -9,7 +9,6 @@ import logging
 
 #ud-modules
 from covidplasma_bot.input import keys, paths
-from covidplasma_bot.replier import tweet_replier as tr
 from covidplasma_bot.helper import file_handler as fh, telegram_poster as tp
 from covidplasma_bot.news import news_refresh as nr
 

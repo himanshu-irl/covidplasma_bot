@@ -49,12 +49,19 @@ def fix_requester(requester):
     return requester
 
 #----------------------------------------#
+# function for removing special char from a string
+def remove_special_char(string):
+    string = ''.join(e for e in str(string) if e.isalnum())
+    return string
+
+#----------------------------------------#
 # function for creating unique row_id of data
 def create_row_id(data_df):
     row_id = ''
     for col in data_df.columns:
         if col not in ['','posted','row_id','Timestamp']:
-            x = data_df[col].apply(lambda x: str(x)[0:2])
+            x = data_df[col].apply(lambda x: remove_special_char(x))
+            x = x.apply(lambda x: str(x)[0:2]+str(x)[-2:])
             row_id = row_id + x
             
     return row_id

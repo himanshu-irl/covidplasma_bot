@@ -72,17 +72,26 @@ tsi_reply_list_old = ['@TeamSOSIndia Could you please look into this request?'
 
 media_ls = os.listdir(paths.media_path)
 
+# for search-reply-bot
 filter_keywords = ['covidplasmain','madihafatima27','blood4pune','abhilasha1508','hydblooddonors'
-                   ,'blooddonorsin','teamsosindia','theniteshsingh','raktnssdtu','kabwelfare'
+                   ,'BloodDonorsIn','teamsosindia','theniteshsingh','raktnssdtu','kabwelfare'
                    ,'blood_matter','bloodaid','icansavelife','dramebaz_woman','TheNeatSoul','ELister_social']
 
-txt_filter_keywords = ['blood4pune','SOSSaviours','sandhyafernez','rohit_4464','boomzy1231','DarshanNPopat','kalpeshvporwal1','INCaniketMhatre'
-                       ,'manishJain1234','dial4242','indiacares_2020']
+''''blood4pune','SOSSaviours','sandhyafernez','rohit_4464','boomzy1231'
+                        ,'DarshanNPopat','kalpeshvporwal1','INCaniketMhatre','manishJain1234'
+                        ,'dial4242','indiacares_2020','''
+                        
+# negative keywords to look in tweet text and don't reply if keyword exists
+txt_filter_keywords = ['thank','thanks','collaboration','collaborate'
+                        ,'association','appreciation','amazing','proud','Via: @CovidPlasmaIn'
+                        ,'via: @CovidPlasmaIn','Via @CovidPlasmaIn','via @CovidPlasmaIn']
 
+# no-reply accounts for mention-reply-bot
 mentions_acc_filter = ['i_lakshay99','CasesGurgaon','architgupta99','dramebaz_woman'
                         ,'TheNeatSoul','TheNiteshSingh','FeedPPL','Sharmavs199'
                         ,'OberoiUgo','damodarpulpet','TeamSOSIndia'
-                        ,'RaktaSatyagrah','TSIArmy','yuvahallabol']
+                        ,'RaktaSatyagrah','TSIArmy','yuvahallabol','blooddonorsin'
+                        ,'TheGufranKhan','BloodDonorsIn']
 
 mention_acc_check = ['TeamSOSIndia']
 
@@ -103,9 +112,9 @@ mention_reply_template = '''::greet:: ::user_name::
 
 Case ID: ::case_id::
 
-The team is currently overloaded with the requests and will cater this case in chronological order.
-
 ::hashtag::'''
+
+#The team is currently overloaded with the requests and will cater this case in chronological order.
 
 news_post_template = '''#CovidUpdate #Covid19India
 
@@ -120,6 +129,8 @@ resource_template = '''#::city:: #::resource_type::
 #Verified @ ::dtmz:: ✅
 
 ::info_txt::
-::contact_txt::
+
+Contact given in image.
 ::twt_handle::
-#Covid19IndiaHelp'''
+#Covid19IndiaHelp
+#TeamIndiaVsCovid'''
