@@ -201,7 +201,7 @@ def reply_to_mentions(CONSUMER_KEY
                         reply_flag = True
                     
                     if reply_flag:
-                        if len(mention_acc_flag) > 0 or len(mention_last_twt_check):
+                        if len(mention_acc_flag) > 0 or len(mention_last_twt_check) > 0:
                             # when tsi mentioned or mentioned in reply to an existing tweet
                             # normal template is followed
                             twt_inp_ls = tweet_list
@@ -211,27 +211,28 @@ def reply_to_mentions(CONSUMER_KEY
                             twt_inp_ls = tsi_reply_list
                             tsi_check_flag = 1
                         
-                        print('responding back...', flush=True)
-                        logger.info('responding back...')
-                        api.update_status(th.reply_back(greet_list
-                                                        ,mention_user_name
-                                                        ,twt_inp_ls
-                                                        ,publish_dtm = publish_dtm()
-                                                        ,trend_df = ct.get_covid_data(logger)
-                                                        ,hash_list = hash_list
-                                                        ,tsi_check_flag=tsi_check_flag
-                                                        ,case_id=twt_id)
-                                        ,twt_id
-                                        ,auto_populate_reply_metadata=True
-                                        ,media_ids=th.attach_media_files(api,param.media_ls))
-                        logger.info(str(twt_id) + ' - ' + str(mention_user_name) + ' - ' + str(mention_twt_txt))
-                        
-                        tp.send_message(tgram_token,tgram_success_chatid,'COPLA MENTION REPLY BOT - ' + str(twt_id) + ' - ' + str(mention_user_name) + ' - ' + str(mention_twt_txt))
-                                            
-                        #Updating mentions tweet ID list
-                        logger.info('storing tweet ID...')
-                        fh.store_last_seen_id(twt_id, MENTION_FILE_NAME)
-                        
-                        time.sleep(random.randint(rand_sleep*60,(rand_sleep+sleep_lag)*60))
+                        if tsi_check_flag == 1:
+                            print('responding back...', flush=True)
+                            logger.info('responding back...')
+                            api.update_status(th.reply_back(greet_list
+                                                            ,mention_user_name
+                                                            ,twt_inp_ls
+                                                            ,publish_dtm = publish_dtm()
+                                                            ,trend_df = ct.get_covid_data(logger)
+                                                            ,hash_list = hash_list
+                                                            ,tsi_check_flag=tsi_check_flag
+                                                            ,case_id=twt_id)
+                                            ,twt_id
+                                            ,auto_populate_reply_metadata=True
+                                            ,media_ids=th.attach_media_files(api,param.media_ls))
+                            logger.info(str(twt_id) + ' - ' + str(mention_user_name) + ' - ' + str(mention_twt_txt))
+                            
+                            tp.send_message(tgram_token,tgram_success_chatid,'COPLA MENTION REPLY BOT - ' + str(twt_id) + ' - ' + str(mention_user_name) + ' - ' + str(mention_twt_txt))
+                                                
+                            #Updating mentions tweet ID list
+                            logger.info('storing tweet ID...')
+                            fh.store_last_seen_id(twt_id, MENTION_FILE_NAME)
+                            
+                            time.sleep(random.randint(rand_sleep*60,(rand_sleep+sleep_lag)*60))
                 except:
                     print('error encountered...')

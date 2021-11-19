@@ -91,7 +91,7 @@ mentions_acc_filter = ['i_lakshay99','CasesGurgaon','architgupta99','dramebaz_wo
                         ,'TheNeatSoul','TheNiteshSingh','FeedPPL','Sharmavs199'
                         ,'OberoiUgo','damodarpulpet','TeamSOSIndia'
                         ,'RaktaSatyagrah','TSIArmy','yuvahallabol','blooddonorsin'
-                        ,'TheGufranKhan','BloodDonorsIn']
+                        ,'TheGufranKhan','BloodDonorsIn','dulcetchani']
 
 mention_acc_check = ['TeamSOSIndia']
 
